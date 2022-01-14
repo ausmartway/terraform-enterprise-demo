@@ -37,10 +37,10 @@ resource "aws_key_pair" "demo-key-pair" {
    key_name = aws_key_pair.demo-key-pair.key_name
    instance_type = "t2.micro"
    associate_public_ip_address = true
-   hibernation = true
    tags = {
      Name = "demo-ec2-instance-with-key"
      TTL  = 168
+  Owner= "yulei@hashicorp.com"
      Purpose = "demo for terraform oss with s3 remote statefile"
    }
  }
