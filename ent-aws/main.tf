@@ -32,6 +32,9 @@ resource "aws_key_pair" "demo-key-pair" {
   public_key = tls_private_key.tlskey.public_key_openssh
 }
 
+
+
+
  resource "aws_instance" "demo-ec2-instance-with-key" {
    ami           = data.aws_ami.ubuntu.id
    key_name = aws_key_pair.demo-key-pair.key_name
