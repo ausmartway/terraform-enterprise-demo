@@ -36,10 +36,15 @@ resource "aws_key_pair" "demo-key-pair" {
    ami           = data.aws_ami.ubuntu.id
    key_name = aws_key_pair.demo-key-pair.key_name
    instance_type = "t2.micro"
+   associate_public_ip_address = true
+   hibernation = true
    tags = {
      Name = "demo-ec2-instance-with-key"
+     TTL  = 168
+     Purpose = "demo for terraform oss with s3 remote statefile"
    }
  }
+
 
 #  output "private_key" {
 #    value = tls_private_key.tlskey.private_key_pem
