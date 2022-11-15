@@ -8,7 +8,7 @@ on:
 
 defaults:
   run:
-    working-directory: enterprise-github-actions
+    working-directory: oss-github-actions
 
 jobs:
   terraform:
