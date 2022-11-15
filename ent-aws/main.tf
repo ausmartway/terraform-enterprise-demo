@@ -1,6 +1,6 @@
 ##main.tf
 provider "aws" {
-    region="ap-southeast-2"
+  region = "ap-southeast-2"
 }
 
 provider "tls" {
@@ -24,7 +24,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "tls_private_key" "tlskey" {
-  algorithm   = "RSA"
+  algorithm = "RSA"
 }
 
 resource "aws_key_pair" "demo-key-pair" {
@@ -35,18 +35,18 @@ resource "aws_key_pair" "demo-key-pair" {
 
 
 
- resource "aws_instance" "demo-ec2-instance-with-key" {
-   ami           = data.aws_ami.ubuntu.id
-   key_name = aws_key_pair.demo-key-pair.key_name
-   instance_type = "t2.micro"
-   associate_public_ip_address = true
-   tags = {
-     Name = "demo-ec2-instance-with-key"
-     TTL  = 168
-  Owner= "yulei@hashicorp.com"
-     Purpose = "demo for terraform oss with s3 remote statefile"
-   }
- }
+resource "aws_instance" "demo-ec2-instance-with-key" {
+  ami                         = data.aws_ami.ubuntu.id
+  key_name                    = aws_key_pair.demo-key-pair.key_name
+  instance_type               = "t2.micro"
+  associate_public_ip_address = true
+  tags = {
+    Name    = "demo-ec2-instance-with-key"
+    TTL     = 168
+    Owner   = "yulei@hashicorp.com"
+    Purpose = "demo for terraform cloud with vcs integration"
+  }
+}
 
 #  output "private_key" {
 #    value = tls_private_key.tlskey.private_key_pem
