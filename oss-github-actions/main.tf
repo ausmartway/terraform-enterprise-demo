@@ -41,7 +41,7 @@ resource "aws_instance" "demo-ec2-instance-with-key" {
     Name    = "demo-ec2-instance-with-key"
     TTL     = 168
     Owner   = "yulei@hashicorp.com"
-    Purpose = "demo for terraform oss with local statefile"
+    Purpose = "demo for terraform oss triggered by github actions with s3 backend"
   }
 }
 
