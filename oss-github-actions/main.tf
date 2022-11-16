@@ -27,14 +27,14 @@ resource "tls_private_key" "tlskey" {
   algorithm = "RSA"
 }
 
-resource "aws_key_pair" "demo-key-pair" {
-  key_name   = "yulei-demo-key-oss-local"
+resource "aws_key_pair" "demo-key-pair-oss-github-action" {
+  key_name   = "demo-key-pair-oss-github-action"
   public_key = tls_private_key.tlskey.public_key_openssh
 }
 
 resource "aws_instance" "demo-ec2-instance-with-key" {
   ami                         = data.aws_ami.ubuntu.id
-  key_name                    = aws_key_pair.demo-key-pair.key_name
+  key_name                    = aws_key_pair.demo-key-pair-oss-github-action.key_name
   instance_type               = "t2.micro"
   associate_public_ip_address = true
   tags = {
