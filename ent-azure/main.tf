@@ -10,6 +10,6 @@ provider "azurerm" {
 
 module "hashicat" {
   source  = "app.terraform.io/yulei/hashicat/azure"
-  version = "0.0.15"
+  version = "0.0.16"
   prefix  = "yuleiliu"
 }
