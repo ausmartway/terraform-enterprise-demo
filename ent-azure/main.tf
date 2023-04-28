@@ -13,3 +13,9 @@ module "hashicat" {
   version = "0.0.16"
   prefix  = "yuleiliu"
 }
+
+module "demo2instance" {
+  source  = "app.terraform.io/yulei/hashicat/azure"
+  version = "0.0.15"
+  prefix  = "yuleiliu"
+}
