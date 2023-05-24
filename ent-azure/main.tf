@@ -8,13 +8,8 @@ provider "azurerm" {
   }
 }
 
-module "hashicat" {
-  source  = "app.terraform.io/yulei/hashicat/azure"
-  version = "0.0.16"
-  prefix  = "yuleiliu"
-}
-
-module "hashicat2" {
-  source  = "app.terraform.io/yulei/hashicat/azure"
-  version = "0.0.16"
-}
+# module "hashicat" {
+#   source  = "app.terraform.io/yulei/hashicat/azure"
+#   version = "0.0.16"
+#   prefix  = "yuleiliu"
+# }
