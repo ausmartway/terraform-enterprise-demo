@@ -21,8 +21,7 @@ class MyStack extends TerraformStack {
     new Hashicat(this, "hashicat", {
       prefix: "asbdemo2",}
     );
-
-
+    
 }
 }
 
