@@ -10,6 +10,7 @@ class MyStack extends TerraformStack {
 
     // define resources here
 
+    // AzurermProvider
     new provider.AzurermProvider(this, "azurerm", {
       features: {
         resourceGroup: {
@@ -18,6 +19,7 @@ class MyStack extends TerraformStack {
       }
     });
 
+    // Hashicat
     new Hashicat(this, "hashicat", {
       prefix: "asbdemo2",}
     );
