@@ -32,18 +32,18 @@ resource "aws_key_pair" "demo-key-pair-oss-github-action" {
   public_key = tls_private_key.tlskey.public_key_openssh
 }
 
-# resource "aws_instance" "demo-ec2-instance-with-key" {
-#   ami                         = data.aws_ami.ubuntu.id
-#   key_name                    = aws_key_pair.demo-key-pair-oss-github-action.key_name
-#   instance_type               = "t2.micro"
-#   associate_public_ip_address = true
-#   tags = {
-#     Name    = "demo-ec2-instance-with-key"
-#     TTL     = 168
-#     Owner   = "yulei@hashicorp.com"
-#     Purpose = "demo for terraform oss triggered by github actions with s3 backend"
-#   }
-# }
+resource "aws_instance" "demo-ec2-instance-with-key" {
+  ami                         = data.aws_ami.ubuntu.id
+  key_name                    = aws_key_pair.demo-key-pair-oss-github-action.key_name
+  instance_type               = "t2.micro"
+  associate_public_ip_address = true
+  tags = {
+    Name    = "demo-ec2-instance-with-key"
+    TTL     = 168
+    Owner   = "yulei@hashicorp.com"
+    Purpose = "demo for terraform oss triggered by github actions with s3 backend"
+  }
+}
 
 output "private_key" {
   value     = tls_private_key.tlskey.private_key_pem
