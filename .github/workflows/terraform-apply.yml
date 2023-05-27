@@ -45,7 +45,6 @@ jobs:
           configuration_version: ${{ steps.apply-upload.outputs.configuration_version_id }}
 
       - name: Apply
-        if: steps.filter.outputs.ent-github-actions == 'true'
         uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.0
         if: fromJSON(steps.apply-run.outputs.payload).data.attributes.actions.IsConfirmable && steps.filter.outputs.ent-github-actions == 'true'
         id: apply
