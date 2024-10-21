@@ -2,6 +2,10 @@ name: "Terraform Plan"
 
 on:
   pull_request:
+    branches:
+      - main
+    paths:
+      - 'ent-github-actions/**'
 
 env:
     TF_CLOUD_ORGANIZATION: "yulei"
@@ -20,8 +24,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
+        
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            ent-github-actions:
+              - 'ent-github-actions/**'
+              
       - name: Upload Configuration
+        if: steps.changes.outputs.ent-github-actions == 'true'
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload
         with:
