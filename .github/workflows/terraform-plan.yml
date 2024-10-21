@@ -20,16 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            ent-github-actions:
-              - 'ent-github-action/**'
 
       - name: Upload Configuration
-        if: steps.filter.outputs.ent-github-actions == 'true'
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload
         with:
@@ -38,7 +30,6 @@ jobs:
           speculative: true
 
       - name: Create Plan Run
-        if: steps.filter.outputs.ent-github-actions == 'true'
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
         id: plan-run
         with:
@@ -47,14 +38,12 @@ jobs:
           plan_only: true
 
       - name: Get Plan Output
-        if: steps.filter.outputs.ent-github-actions == 'true'
         uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.0.0
         id: plan-output
         with:
           plan: ${{ fromJSON(steps.plan-run.outputs.payload).data.relationships.plan.data.id }}
 
       - name: Update PR
-        if: steps.filter.outputs.ent-github-actions == 'true'
         uses: actions/github-script@v6
         id: plan-comment
         with:

@@ -13,6 +13,7 @@ env:
 
 jobs:
   terraform:
+    if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
     name: "Terraform Apply"
     runs-on: ubuntu-latest
     permissions:
@@ -21,15 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            ent-github-actions:
-              - 'ent-github-action/**'
-
       - name: Upload Configuration
-        if: steps.filter.outputs.ent-github-actions == 'true'
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: apply-upload
         with:
@@ -37,7 +30,6 @@ jobs:
           directory: ${{ env.CONFIG_DIRECTORY }}
 
       - name: Create Apply Run
-        if: steps.filter.outputs.ent-github-actions == 'true'
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
         id: apply-run
         with:
@@ -46,7 +38,7 @@ jobs:
 
       - name: Apply
         uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.0
-        if: fromJSON(steps.apply-run.outputs.payload).data.attributes.actions.IsConfirmable && steps.filter.outputs.ent-github-actions == 'true'
+        if: fromJSON(steps.apply-run.outputs.payload).data.attributes.actions.IsConfirmable
         id: apply
         with:
           run: ${{ steps.apply-run.outputs.run_id }}
