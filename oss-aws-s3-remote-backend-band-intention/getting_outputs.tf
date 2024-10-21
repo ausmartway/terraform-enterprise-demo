@@ -1,3 +1,4 @@
+#below data can read all outputs from a terraform statefile that is stored in the same s3 bucket. Change the value of "key" to the name of the terraform statefile you want to read outputs from.
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
