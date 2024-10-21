@@ -33,7 +33,6 @@ jobs:
               - 'ent-github-actions/**'
               
       - name: Upload Configuration
-        if: steps.changes.outputs.ent-github-actions == 'true'
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload
         with:
